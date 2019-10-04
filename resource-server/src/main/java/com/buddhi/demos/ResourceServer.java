@@ -19,7 +19,7 @@ public class ResourceServer {
 	}
 
 	@GetMapping("/account")
-	public String getProductDetails() {
+	public String getAccount() {
 		return "account 1";
 	}
 
