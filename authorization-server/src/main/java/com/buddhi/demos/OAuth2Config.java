@@ -6,7 +6,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
@@ -26,7 +25,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 				.and()
 				.withClient("b")
 				.secret(passwordEncoder().encode("b"))
-				.authorities("ROLE_B")
+				.authorities("ROLE_C")
 				.scopes("all")
 				.authorizedGrantTypes("client_credentials");
 	}
@@ -34,7 +33,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 //		security.checkTokenAccess("permitAll()");
-		security.checkTokenAccess("hasAuthority('ROLE_TRUSTED_CLIENT')");
+		security.checkTokenAccess("hasAuthority('ROLE_C')");
 	}
 
 	@Bean
